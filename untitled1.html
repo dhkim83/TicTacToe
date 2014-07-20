@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html ng-app="tictactoe" ng-controller="pad">
+
+<head>
+
+<!-- <link rel="stylesheet" href="style.css" type="text/css"> -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js">
+</script>
+
+<title>TicTacToe</title>
+
+<style>
+h1 {
+	text-align: center;
+}
+
+body {
+	width:100%;
+	background-color:
+	#f9f9f9;
+}
+.column {
+width: 150px;
+height: 150px;
+display: inline-block;
+border: 1px solid blue;
+margin: 0 auto;
+float: center;
+
+
+}
+
+.y{
+background-color: green;
+}
+
+.reset{
+
+}
+
+
+</style> 
+</head>
+
+<body>
+
+<div class="board" div id="game_start">
+<h1>Tic Tac Toe!</h1>
+<div class="row" ng-repeat="row in board">
+<div class="column" ng-class="column" ng-repeat="column in row" ng-click="button($parent.$index, $index)"></div>
+</div>
+</div>
+
+
+
+</div>
+
+
+<script type="text/javascript">
+
+var tictactoe = angular.module("tictactoe", []);
+tictactoe.controller("pad", function($scope) {
+
+board = [
+			[ "" , "" , "" ],
+			[ "" , "" , "" ],
+			[ "" , "" , "" ]
+			];
+
+// initialize scopes
+
+$scope.button = function(row,column) {
+$scope.board[row][column] = 'y'; 
+};
+
+
+$scope.board = [[0,1,2],[0,1,2],[0,1,2]];
+
+
+$scope.player1 = function(player1Name) {
+	$scope.player1Name = '';
+	$scope.leftScore += 1;
+};
+
+$scope.player2 = function(player2Name) {
+	$scope.player2Name = '';
+	$scope.rightScore += 1;
+};
+	
+
+var currentBoard = 'o'
+var boardClick = function(row,column){
+$scope.board[row][column] = 'y';
+ {
+			if (currentBoard == 'o') {
+				$scope.board[row][column] = 'x';
+				currentBoard = 'x';
+			} else {
+				$scope.board[row][column] = 'o';
+				currentBoard = 'o';
+			}
+		}
+	
+};
+
+
+$scope.board = function() {
+		if (board[0][0] == "x" && board[0][1] == "x" && board[0][2] == "x") {
+			xwins();
+		} else if (board[0][0] == "o" && board[0][1] == "0" && board[0][2] == "o") {
+			owins();
+		} else if (board[0][0] == "x" && board[1][0] == "x" && board[2][0] == "x") {
+			xwins();
+		} else if (board[0][0] == "o" && board[1][0] == "o" && board[2][0] == "o") {
+			owins();
+		} else if (board[2][0] == "x" && board[2][1] == "x" && board[2][2] == "x") {
+			xwins();
+		} else if (board[2][0] == "o" && board[2][1] == "o" && board[2][2] == "o") {
+			owins();
+		} else if (board[2][0] == "x" && board[1][1] == "x" && board[0][2] == "x") {
+			xwins();
+		} else if (board[2][0] == "o" && board[1][1] == "o" && board[0][2] == "o") {
+			owins();
+		} else if (board[0][2] == "x" && board[1][2] == "x" && board[2][2] == "x") {
+			xwins();
+		} else if (board[0][2] == "o" && board[1][2] == "o" && board[2][2] == "o") {
+			owins();
+		} else if (board[0][0] == "x" && board[1][1] == "x" && board[2][2] == "x") {
+			xwins();
+		} else if (board[0][0] == "o" && board[1][1] == "o" && board[2][2] == "o") {
+			owins();
+		} else if (board[0][1] == "x" && board[1][1] == "x" && board[2][1] == "x") {
+			xwins();
+		} else if (board[0][1] == "o" && board[1][1] == "o" && board[2][1] == "o") {
+			owins();
+		} else if (board[1][0] == "x" && board[1][1] == "x" && board[1][2] == "x") {
+			xwins();
+		} else if (board[1][0] == "o" && board[1][1] == "o" && gridboard[1][2] == "o") {
+			owins();
+		} else if (moves == 9) {
+			else {
+			moves += 1;
+		}
+		};
+
+var xWins = function () {
+		$scope.leftMessage = $scope.player1Name + " winner!";
+		gameover = true;
+		$scope.leftScore += 1;
+	};
+
+var oWins = function () {
+		$scope.rightMessage = $scope.player2Name + " winner!";
+		gameover = true;
+		$scope.rightScore += 1;
+	};
+// }); end of scope 
+
+</script>
+</body>
+</html>
