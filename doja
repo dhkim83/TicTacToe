@@ -11,10 +11,19 @@
 
 <style>
 
-table{
+h1 {
+    font-size: 60px;
+    text-align: center;
+    color: #011009;
+}
+
+table {
+    vertical-align: center;
     border:1px solid black;
     background-image: ;
+    position: fixed;
 }
+
 tr {
 padding: 20px;
 border-width: thick;
@@ -45,7 +54,7 @@ td {
 <h1>Tic Tac Toe</h1>
   <div ng-app="tictactoe" ng-controller="pad">
 
-     <h2 ng-show="winner">Winner is {{winner}}! <input type="button"
+     <h2 ng-show="You Won">Winner is {{winner}}! <input type="button"
 ng-click="newGame()" value="New Game" /></h2>
 
     <table> 
@@ -59,6 +68,14 @@ ng-class="cellClass(row,column)">{{cellText(row,column)}}</td> -->
     </table>
 
 
+//Additional
+<!-- player1 -->
+
+<div id="player1" input type="text"= ng-model="player1Name" ng-init="player1Name ='player1'" ng-click="Name1(player1)"></div>
+
+<!-- player2 -->
+
+<div id="player2" input type="text" ng-model="Player2Name" ng-init="player2Name ='player2'" ng-click="Name2(player2)"></div>
     <!-- <div class= "board" ng-repeat="row in [0,1,2] column in [0,1,2]" ng-click="cellClick(row,column)" ng-class:"cellClass(row,column)">{{cellText(row,column)}}</div>//   -->
         
     </div>
@@ -69,17 +86,29 @@ ng-class="cellClass(row,column)">{{cellText(row,column)}}</td> -->
 <script type='text/javascript'>
 
 var tictactoe = angular.module("tictactoe", []);
-tictactoe.controller("pad", function($scope) {
+tictactoe.controller("pad", function($scope, $firebase) {
 
 
     // == initialize scope ==
-    $scope.currentPlayer = 'O'
-    $scope.winner = '0'
+    
+
+//Additional 
+    $scope.payer1 = 'o'
+    $scope.player2 = 'o' 
+    
+    $scope.winner = 'o'
     $scope.board = [
         ["", "", ""],
         ["", "", ""],
         ["", "", ""]
     ]
+
+
+//Additional 
+    $scope.leftScore = 0;
+    $scope.rightScore = 0;
+    $scope.centerScore = 0; 
+
 
 
     // == scope functions ==
@@ -98,17 +127,23 @@ tictactoe.controller("pad", function($scope) {
             return
         }
         setCell(row, column, $scope.currentPlayer)
+        // ($scope.player1 $scope.player2)
         checkBoard()
         checkTurn()
-    }
+
+    
+}
     $scope.newGame = function () {
         for (var i = 0; i < 3; i++) {
             for (var j = 0; j < 3; j++) {
                 setCell(i, j, null)
             }
-        }
-        $scope.currentPlayer = 'O'
-        $scope.winner = '0'
+        }''
+
+    
+        $scope.player1 = 'o'
+        $scope.player2 = 'o'
+        $scope.winner = 'o'
     }
 
 
@@ -125,11 +160,11 @@ tictactoe.controller("pad", function($scope) {
     }
     // determines whether X turn or O turn
     function checkTurn() {
-        if ($scope.currentPlayer === 'x')  {
-            $scope.currentPlayer = 'o'
+        if ($scope.player1 === 'x')  {
+            $scope.player2 = 'o'
         }
         else {
-            $scope.currentPlayer = 'x'
+            $scope.player2 = 'x'
         }
     }
     // checks the board and declare winner
@@ -149,7 +184,22 @@ tictactoe.controller("pad", function($scope) {
             return
         }
 
-        // check board vertically and horizontally
+//Additional 
+var oWins =function();
+    $scope.left = $scope.player1Name + "Win!";
+    $scope.leftScore +=1
+
+    var xWins = function()
+    $scope.right = $scope.player2Name + "Win!";
+    $scope.rightScore +=1 
+
+    var ties = function()
+    $scope.center = $scope.player1Name $scope.playerName2 +"Tied!";
+    $scope.centerScore +=1
+
+
+
+        // (game sequences) winning function: check board vertically and horizontally
         for (var i = 0; i < 3; i++) {
             if (cell(i, 0) && cell(i, 0) == cell(i, 1) && cell(i, 1) ==
 cell(i, 2)) {
@@ -161,7 +211,7 @@ cell(2, i)) {
             }
         }
 
-        // check board diagonally
+        // winning function: check board diagonally
         if (cell(0, 0) && cell(0, 0) == cell(1, 1) && cell(1, 1) ==
 cell(2, 2)) {
             winner = cell(0, 0)
@@ -171,9 +221,31 @@ cell(2, 0)) {
             winner = cell(0, 2)
         }
 
+
+// Additional 
+        if (cell(0, 2) && cell(0, 2) == cell(1, 2) && cell(1, 2) == cell(2, 2) {
+            winner = cell(0, 2)
+        }
+        if (cell(2, 0) && cell(2, 0) == cell(2, 1) && cell(2, 1) == cell(2, 2) {
+            winner = cell(2, 0)
+        }
+        if (cell(1, 0) && cell(1, 0) == cell(1, 1) && cell(1, 1) == cell(1, 2) {
+            winner = cell(1, 0)
+        }
+        if (cell(0, 1) && cell(0, 1) == cell(1, 1) && cell(1, 1) == cell(2, 1) {
+            winner = cell(0, 1)
+        }
+
         // winner? declare!
         if (winner) {
             $scope.winner = winner
+        }
+
+        //Additional 
+        if (player1 = winner){
+            $scope.player1 = winner
+            else 
+         {$scope.player2 =winner}
         }
 
     }
