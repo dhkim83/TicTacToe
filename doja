@@ -20,7 +20,7 @@ h1 {
 table {
     vertical-align: center;
     border:1px solid black;
-    background-image: ;
+    background-image: ?? ;
     position: fixed;
 }
 
@@ -44,6 +44,13 @@ td {
   text-align: center;
   vertical-align: center;
   background-color: #f9f9f9;
+
+   }
+
+   #player1 { 
+   }
+
+   #player2 {
 
    }
 
@@ -96,7 +103,7 @@ tictactoe.controller("pad", function($scope, $firebase) {
     $scope.payer1 = 'o'
     $scope.player2 = 'o' 
     
-    $scope.winner = 'o'
+    $scope.winner = null
     $scope.board = [
         ["", "", ""],
         ["", "", ""],
@@ -133,6 +140,8 @@ tictactoe.controller("pad", function($scope, $firebase) {
 
     
 }
+
+// Restart or NewGame
     $scope.newGame = function () {
         for (var i = 0; i < 3; i++) {
             for (var j = 0; j < 3; j++) {
@@ -143,7 +152,7 @@ tictactoe.controller("pad", function($scope, $firebase) {
     
         $scope.player1 = 'o'
         $scope.player2 = 'o'
-        $scope.winner = 'o'
+        $scope.winner = null 
     }
 
 
@@ -193,50 +202,62 @@ var oWins =function();
     $scope.right = $scope.player2Name + "Win!";
     $scope.rightScore +=1 
 
+
+// ?? 
     var ties = function()
     $scope.center = $scope.player1Name $scope.playerName2 +"Tied!";
     $scope.centerScore +=1
 
 
 
-        // (game sequences) winning function: check board vertically and horizontally
-        for (var i = 0; i < 3; i++) {
-            if (cell(i, 0) && cell(i, 0) == cell(i, 1) && cell(i, 1) ==
-cell(i, 2)) {
-                winner = cell(i, 0)
+        // (Game Sequences) Winning Functions: 
+        for (var i = 0; i < 3; i++) 
+
+            //horizontal 
+        {
+            if (cell(0, 0) && cell(0, 0) == cell(0, 1) && cell(0, 1) == cell(0, 2)) {
+                winner = cell(0, 0)
             }
-            if (cell(0, i) && cell(0, i) == cell(1, i) && cell(1, i) ==
-cell(2, i)) {
-                winner = cell(0, i)
+            //vertical
+            if (cell(0, 0) && cell(0, 0) == cell(1, 0) && cell(1, 0) == cell(2, 0)) {
+                winner = cell(0, 0)
             }
+        }
+            //diagonal
+            if (cell(0, 0) && cell(0, 0) == cell(1, 1) && cell(1, 1) == cell(2, 2)) {
+                winner = cell(0, 0)
         }
 
-        // winning function: check board diagonally
-        if (cell(0, 0) && cell(0, 0) == cell(1, 1) && cell(1, 1) ==
-cell(2, 2)) {
-            winner = cell(0, 0)
-        }
-        if (cell(0, 2) && cell(0, 2) == cell(1, 1) && cell(1, 1) ==
-cell(2, 0)) {
-            winner = cell(0, 2)
+            //diagonal 
+            if (cell(0, 2) && cell(0, 2) == cell(1, 1) && cell(1, 1) == cell(2, 0)) {
+                winner = cell(0, 2)
         }
 
 
 // Additional 
-        if (cell(0, 2) && cell(0, 2) == cell(1, 2) && cell(1, 2) == cell(2, 2) {
-            winner = cell(0, 2)
-        }
-        if (cell(2, 0) && cell(2, 0) == cell(2, 1) && cell(2, 1) == cell(2, 2) {
-            winner = cell(2, 0)
-        }
-        if (cell(1, 0) && cell(1, 0) == cell(1, 1) && cell(1, 1) == cell(1, 2) {
-            winner = cell(1, 0)
-        }
-        if (cell(0, 1) && cell(0, 1) == cell(1, 1) && cell(1, 1) == cell(2, 1) {
-            winner = cell(0, 1)
+
+            //vertical
+            if (cell(0, 2) && cell(0, 2) == cell(1, 2) && cell(1, 2)
+                == cell(2, 2)) {
+                winner = cell(0, 2)
         }
 
-        // winner? declare!
+            //horizontal 
+            if (cell(2, 0) && cell(2, 0) == cell(2, 1) && cell(2, 1) == cell(2, 2)) {
+                winner = cell(2, 0)
+        }
+
+            //horizontal 
+            if (cell(1, 0) && cell(1, 0) == cell(1, 1) && cell(1, 1) == cell(1, 2)) {
+                winner = cell(1, 0)
+        }
+
+            //vertical
+            if (cell(0, 1) && cell(0, 1) == cell(1, 1) && cell(1, 1) == cell(2, 1)) {
+                winner = cell(0, 1)
+        }
+
+        // declare winner 
         if (winner) {
             $scope.winner = winner
         }
