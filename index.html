@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="tttapp" ng-controller="tttController">
+<head>
+	<title>Tic Tac Toe</title>
+
+	<link rel="stylesheet" href="style.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+	<script src="app.js"></script>
+</head>
+<body>
+		<div class="left">
+		<br />
+		<p><input type="text" id="p1_name" ng-model="p1Name" ng-init="p1Name = 'Player 1'" ng-click="setName1(p1Name)"/><p>
+		<br />
+		<p>{{p1Score}}</p>
+		<p id="left_message">{{leftMessage}}</p>
+	</div>
+	<div class="right">
+		<br />
+		<p><input type="text" id="p2_name" ng-model="p2Name" ng-init="p2Name = 'Player 2'" ng-click="setName2(p2Name)"/><p>
+		<br />
+		<p>{{p2Score}}</p>
+		<p id="right_message">{{rightMessage}}</p>
+	</div>
+	<div class="header">Tic Tac Toe</div>
+	<div class="container" ng-model="boxes">
+		<div class="game" ng-repeat="box in boxes" ng-click="clickIt(box)" ng-class="{oClass: box.odd, xClass: box.even}"></div>{{box}}</div>
+		<br />
+		<div class="reset" ng-click="clearBoard()">New Game</div>
+	</div>
+</body>
+</html>
